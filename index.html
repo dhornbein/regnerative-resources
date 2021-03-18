@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regenerative Resources</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section class="section">
+
+    <!-- Heading and Introductory Paragraph -->
+        <h1 class="title">
+          Regenerative Resources
+        </h1>
+        <p class="lead">
+            Check out these books, websites, and resources compiled by change makers.
+        </p>
+        <p class="note is-size-7 has-text-grey">
+          <em>
+            * Some of the websites and books use affiliate links to help raise money,
+              you can support this project by clicking the links!
+            Also, content on this page is publically editable, if you see
+              something amiss please
+              <a href="mailto:hello@dhornbein.com">email hello@dhornbein.com</a>.
+          </em>
+        </p>
+  </section>
+  <!-- Lists of Resources - Populated using JavaScript and Vue -->
+  <div id="main">
+    <section class="section" id="books">
+      <h2 class="title is-3">📖 Books</h2>
+
+      <div class="books columns" v-if="books">
+        <div class="book column is-half-mobile is-one-third-tablet is-one-quarter-desktop"
+              v-for="book in books">
+          <div class="card">
+            <div class="card-image has-text-centered">
+              <a :href="book.link" class="cover">
+                <img :src="book.cover" :alt="book.title" v-if="book.cover">
+              </a>
+            </div>
+            <div class="card-content">
+              <p>
+                <strong>(( book.title ))</strong>
+              </p>
+              <p class="desc">
+                (( book.description ))
+              </p>
+            </div>
+            <div class="card-footer">
+              <a :href="book.link" v-if="book.link" class="card-footer-item">Buy on Amazon</a>
+            </div>
+          </div><!-- .card -->
+        </div><!-- .book -->
+      </div><!-- .books -->
+      <p v-else>Loadings...</p>
+    </section>
+
+    <section class="section">
+      <div class="columns">
+        <div class="column">
+          <p>
+            <strong>Got more resources?</strong>
+            Resources on this page come from a public Google Spreadsheet, feel free to add or edit!
+          </p>
+        </div>
+        <div class="column is-one-quarter">
+          <a :href="workbookEditURL" class="button is-success is-fullwidth">View Spreadsheet</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="websites">
+      <h2 class="title is-3">💻 Websites</h2>
+      <ul class="websites" v-if="websites">
+        <li class="site ml-3"
+            v-for="website in websites"
+            v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
+          <p>
+            <a :href="website.link" target="_blank">(( prettyLink( website.link ) ))</a>
+            <br>
+            (( website.description ))
+            <br>
+            <small v-if="website.referralLink">[<a :href="website.referralLink">Referral Link</a>]</small>
+          </p>
+        </li>
+      </ul>
+      <p v-else>Loadings...</p>
+    </section>
+
+    <section class="section" id="tools">
+      <h2 class="title is-3" >🛠 Resources</h2>
+      <div class="field">
+        <label class="label" for="filter">Filter Tools</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Text input" name="filter" value="" v-model="search">
+        </div>
+      </div>
+      <ul class="tools" v-if="tools">
+        <li class="site ml-3"
+            v-for="tool in tools"
+            v-bind:style="{ listStyleImage: 'url(' + tool.icon + ')' }"
+            v-if="tool.link"
+            v-show="tool.filtered()">
+          <p class="mb-2">
+            <a :href="tool.link" target="_blank"><strong>(( tool.name ))</strong></a>
+            –
+            (( tool.description ))
+            <br>
+            <small v-if="tool.referralLink">[<a :href="tool.referralLink">
+              <template v-if="tool.referralText">(( tool.referralText ))</template>
+              <template v-else>Referral Link</template>
+            </a>]</small>
+          </p>
+          <div class="tags" v-if="tool.tags">
+            <span class="tag" v-for="tag in tool.tags">(( tag ))</span>
+          </div>
+        </li>
+      </ul>
+      <p v-else>Loadings...</p>
+    </section>
+
+        </div><!-- .resources -->
+      </div><!-- #main -->
+    </div><!-- .container -->
+  </main>
+
+  <script type="text/javascript" src="resources.vue.js"></script>
+</body>
+
+</html>
