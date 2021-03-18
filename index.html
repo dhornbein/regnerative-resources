@@ -10,24 +10,26 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <section class="section">
+  <section class="section readability">
 
     <!-- Heading and Introductory Paragraph -->
         <h1 class="title">
-          Regenerative Resources
+          🌻 Regenerative Resource Library
         </h1>
-        <p class="lead">
-            Check out these books, websites, and resources compiled by change makers.
+        <p class="lead is-size-5">
+            Check out these books, websites, and resources compiled by change makers <em>like you</em>.
         </p>
+        <br>
         <p class="note is-size-7 has-text-grey">
           <em>
-            * Some of the websites and books use affiliate links to help raise money,
-              you can support this project by clicking the links!
+            * Some of the websites and books use affiliate links to help provide some pittance for your humble maintainer,
+              so you can support this project by clicking the links!
             Also, content on this page is publically editable, if you see
-              something amiss please
-              <a href="mailto:hello@dhornbein.com">email hello@dhornbein.com</a>.
+              something amiss please email
+              <a href="mailto:hello@dhornbein.com">hello@dhornbein.com</a>.
           </em>
         </p>
+
   </section>
   <!-- Lists of Resources - Populated using JavaScript and Vue -->
   <div id="main">
@@ -60,15 +62,15 @@
       <p v-else>Loadings...</p>
     </section>
 
-    <section class="section">
-      <div class="columns">
+    <section class="section readability">
+      <div class="columns is-vcentered">
         <div class="column">
           <p>
             <strong>Got more resources?</strong>
             Resources on this page come from a public Google Spreadsheet, feel free to add or edit!
           </p>
         </div>
-        <div class="column is-one-quarter">
+        <div class="column">
           <a :href="workbookEditURL" class="button is-success is-fullwidth">View Spreadsheet</a>
         </div>
       </div>
@@ -128,6 +130,16 @@
       </div><!-- #main -->
     </div><!-- .container -->
   </main>
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        Curated by you & <a href="https://dddrew.com">Drew Hornbein</a>. The source code can be found here
+        <a href="https://github.com/dhornbein/regnerative-resources">on GitHub</a>. The website content
+        is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+      </p>
+    </div>
+  </footer>
 
   <script type="text/javascript" src="resources.vue.js"></script>
 </body>
