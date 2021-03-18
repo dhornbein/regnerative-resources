@@ -22,7 +22,7 @@ const app = new Vue({
     search: '',
     filter: [],
     spreadsheet: {},
-    cacheLifeTime: 5000 //1*60*60*1000, //hours*60*60*1000
+    cacheLifeTime: 5*60*1000, //hours*60*60*1000
   },
 
   /**
