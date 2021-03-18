@@ -86,6 +86,7 @@ const app = new Vue({
      * @return {bool} If data is pulled from cache returns true otherwise false
      */
     getCache: function ( sheetID ) {
+      if ( 'fresh' == window.location.hash.substr(1) ) return false;
       if ( this.cacheIsFresh() && window.localStorage.getItem( sheetID )  ) {
         this.setData( window.localStorage.getItem( sheetID ), sheetID )
         console.log('data loaded from cache:', sheetID);
