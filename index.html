@@ -36,13 +36,13 @@
     <section class="section" id="books">
       <h2 class="title is-3">📖 Books</h2>
 
-      <div class="books columns" v-if="books">
+      <div class="books columns is-multiline" v-if="books">
         <div class="book column is-half-mobile is-one-third-tablet is-one-quarter-desktop"
               v-for="book in books">
           <div class="card">
-            <div class="card-image has-text-centered">
-              <a :href="book.link" class="cover">
-                <img :src="book.cover" :alt="book.title" v-if="book.cover">
+            <div class="card-image has-text-centered" v-if="book.cover">
+              <a :href="book.authorLink ? book.authorLink : book.link" class="cover">
+                <img :src="book.cover" :alt="book.title">
               </a>
             </div>
             <div class="card-content">
@@ -55,6 +55,7 @@
             </div>
             <div class="card-footer">
               <a :href="book.link" v-if="book.link" class="card-footer-item">Buy on Amazon</a>
+              <a :href="book.link" v-if="book.authorLink" class="card-footer-item">Buy from Author</a>
             </div>
           </div><!-- .card -->
         </div><!-- .book -->

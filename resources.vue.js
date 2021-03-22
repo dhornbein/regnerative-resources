@@ -151,6 +151,9 @@ const app = new Vue({
     prettyLink: function ( url ) {
       return this.stripSlash( this.stripHTTP( url ) );
     },
+    isAmazonLink: function ( url ) {
+      return /amazon.com/.test( url );
+    },
     /**
      * Extracts the amazon ASIN from a url string
      * @param  {string} url A url linking to an amazon product
@@ -297,10 +300,17 @@ const app = new Vue({
      */
     books : function () {
       return this.gsxRowObject( this.workbook.sheets.books , function (r,self) {
-        let link = self.gsxGetCol( r, 'amazonlink' );
+        let link = self.gsxGetCol( r, 'amazonlink' ),
+            authorLink = self.gsxGetCol(r, 'authorlink'),
+            cover;
+        if ( self.isAmazonLink( link ) ) {
+          link = self.amazonAffiliateLink(link);
+          cover = self.amazonImageSrc(link)
+        }
         return {
-          link: self.amazonAffiliateLink( link ),
-          cover: self.amazonImageSrc( link ),
+          link: link ? link : false,
+          authorLink: authorLink ? authorLink : false,
+          cover: cover ? cover : false,
           title: self.gsxGetCol( r, 'title' ),
           description: self.gsxGetCol( r, 'description' )
         }
